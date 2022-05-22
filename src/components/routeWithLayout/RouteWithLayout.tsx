@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, RouteProps } from 'react-router';
+import { RouteProps } from 'react-router';
 
 export interface RouteWithLayoutProps extends RouteProps {
     layout: React.FunctionComponent<any>;

@@ -8,17 +8,6 @@ interface Props {
     children: any;
 }
 
-// const useStyles: any = makeStyles(() => ({
-//     root: {},
-//     main: {
-//         display: 'flex',
-//         flexDirection: 'column',
-//         marginLeft: SIDEBAR_WIDTH,
-//         // height: window.innerHeight,
-//         height: '100vh',
-//     },
-// }));
-
 const MainLayout: React.FC<Props> = (props) => {
     const { children } = props;
     // const classes = useStyles();
