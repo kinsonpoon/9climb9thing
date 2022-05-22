@@ -1,75 +1,103 @@
 import React from 'react';
-import  {styled} from "@mui/material";
 
 import { List, ListItem, Typography } from "@mui/material";
-import { Link } from 'react-router-dom';
+import Toolbar from "@mui/material/Toolbar";
+import Divider from "@mui/material/Divider";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from "@mui/material/Drawer";
 
-const Sidebar = styled('div')((props: SideBarProps) =>  ({
+const drawerWidth = 240;
 
-        width: props.width,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-            width: props.width,
-            boxSizing: 'border-box',
-        },
+export const SideBar = () =>{
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    listItem: {
-        display: 'flex',
-        alignItems: 'center',
-        height: 40,
-        marginBottom: 6,
-        borderRadius: 12,
-        '&.MuiListItem-gutters': {
-            paddingLeft: 9,
-        },
-        '&.MuiListItem-root:hover': {
-            // backgroundColor: theme.palette.grey[50],
-
-            // fontWeight: theme.typography.fontWeightBold,
-            '&:hover $navIcon': {
-                // color: theme.palette.grey[400],
-            },
-            '&:hover $listItemText': {
-                // color: theme.palette.grey[700],
-            },
-        },
-        '&.MuiListItem-root.Mui-selected:hover': {
-            // backgroundColor: theme.palette.primary.light,
-        },
-        '&.MuiListItem-root.Mui-selected': {
-            // backgroundColor: theme.palette.primary.light,
-        },
-    },
-}));
-
-interface SideBarProps{
-    width: any
-}
-
-export const SideBar = (props: SideBarProps) =>{
-    const [open, setOpen] = React.useState(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
     };
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-    return (
-            <List >
-                <ListItem
-                    // key
-                    button
-                    selected={true}
-                    component={Link}
-                    to="/home"
-                >
-                        Home
-                    <Typography>
-                        Home
-                    </Typography>
-                </ListItem>
+    const drawer = (
+        <div>
+            <Toolbar />
+            <Divider />
+            <List>
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                yes
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
             </List>
+        </div>
     );
+
+
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    ml: { sm: `${drawerWidth}px` },
+                }}
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div">
+                       9Climb9Thing
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <Box
+                component="nav"
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                aria-label="mailbox folders"
+            >
+                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                <Drawer
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: { xs: 'block', sm: 'none' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+                <Drawer
+                    variant="permanent"
+                    sx={{
+                        display: { xs: 'none', sm: 'block' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                    }}
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
+        </Box>
+    )
 }

@@ -1,7 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import {
   BrowserRouter,
-  Navigate,
   Route,
   Routes,
   useLocation,
@@ -11,7 +10,8 @@ import './App.css';
 import {RouteWithLayout} from "./components/routeWithLayout/RouteWithLayout";
 import {Home} from "./screen/home";
 import MainLayout from "./layout/mainLayout";
-
+import {createTheme} from "@mui/material";
+import { ThemeProvider } from '@mui/material/styles';
 
 const Wrapper = ({ children }: any) => {
   const location = useLocation();
@@ -22,15 +22,23 @@ const Wrapper = ({ children }: any) => {
 };
 
 function App() {
+    const theme =
+            createTheme({
+                palette: {
+                    mode: 'dark'
+                },
+            })
   return (
-      <BrowserRouter>
-        <Wrapper>
-            <Routes>
-                <Route path="/home" element={<RouteWithLayout children={<Home />} layout={MainLayout}/>}  />
-                <Route path="/" element={<RouteWithLayout children={<Home />} layout={MainLayout}/>}  />
-            </Routes>
-        </Wrapper>
-      </BrowserRouter>
+          <ThemeProvider theme={theme}>
+              <BrowserRouter>
+                  <Wrapper>
+                      <Routes>
+                          <Route path="/home" element={<RouteWithLayout children={<Home/>} layout={MainLayout}/>}/>
+                          <Route path="/" element={<RouteWithLayout children={<Home/>} layout={MainLayout}/>}/>
+                      </Routes>
+                  </Wrapper>
+              </BrowserRouter>
+          </ThemeProvider>
   );
 }
 
