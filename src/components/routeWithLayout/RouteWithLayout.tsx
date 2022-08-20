@@ -10,5 +10,5 @@ export const RouteWithLayout: React.FC<RouteWithLayoutProps> = ({
                                                                     element,
                                                                     ...rest
                                                                 }) => {
-    return <Layout>{element}</Layout>;
+    return <Layout children={element}/>;
 };

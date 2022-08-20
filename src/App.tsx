@@ -33,8 +33,8 @@ function App() {
               <BrowserRouter>
                   <Wrapper>
                       <Routes>
-                          <Route path="/home" element={<RouteWithLayout children={<Home/>} layout={MainLayout}/>}/>
-                          <Route path="/" element={<RouteWithLayout children={<Home/>} layout={MainLayout}/>}/>
+                          <Route path="/home" element={<RouteWithLayout element={<Home/>} layout={MainLayout}/>}/>
+                          <Route path="/" element={<RouteWithLayout element={<Home/>} layout={MainLayout}/>}/>
                       </Routes>
                   </Wrapper>
               </BrowserRouter>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List, ListItem, Typography } from "@mui/material";
+import {List, ListItem, Typography} from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -12,10 +12,33 @@ import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
+import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 
-const drawerWidth = 240;
+interface sideBarProps{
+    drawerWidth: number;
+}
 
-export const SideBar = () =>{
+const sideBarOptions = [
+    {
+        name: 'About Me',
+        icon: <GitHubIcon/>,
+    },
+    {
+        name: 'Products',
+        icon: <LocalGroceryStoreIcon/>,
+    },
+    {
+        name: 'Projects',
+        icon: <EmojiFoodBeverageIcon/>,
+    }, {
+        name: 'Contact Me',
+        icon: <LocalPostOfficeIcon/>,
+    }]
+
+export const SideBar = (props: sideBarProps) => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
@@ -24,16 +47,16 @@ export const SideBar = () =>{
 
     const drawer = (
         <div>
-            <Toolbar />
-            <Divider />
+            <Toolbar/>
+            <Divider/>
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
+                {sideBarOptions.map((option, index) => (
+                    <ListItem key={option.name} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                yes
+                                {option.icon}
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={option.name}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -43,13 +66,13 @@ export const SideBar = () =>{
 
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
             <AppBar
                 position="fixed"
                 sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
+                    width: {sm: `calc(100% - ${props.drawerWidth}px)`},
+                    ml: {sm: `${props.drawerWidth}px`},
                 }}
             >
                 <Toolbar>
@@ -58,18 +81,18 @@ export const SideBar = () =>{
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{mr: 2, display: {sm: 'none'}}}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                       9Climb9Thing
+                        9Climb9Thing
                     </Typography>
                 </Toolbar>
             </AppBar>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{width: {sm: props.drawerWidth}, flexShrink: {sm: 0}}}
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -81,8 +104,8 @@ export const SideBar = () =>{
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'block', sm: 'none'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: props.drawerWidth},
                     }}
                 >
                     {drawer}
@@ -90,8 +113,8 @@ export const SideBar = () =>{
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'none', sm: 'block'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: props.drawerWidth},
                     }}
                     open
                 >
