@@ -16,6 +16,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import { useNavigate } from "react-router-dom";
 
 interface sideBarProps{
     drawerWidth: number;
@@ -25,20 +26,25 @@ const sideBarOptions = [
     {
         name: 'About Me',
         icon: <GitHubIcon/>,
+        link: '/home'
     },
     {
         name: 'Products',
         icon: <LocalGroceryStoreIcon/>,
+        link: '/products'
     },
     {
         name: 'Projects',
         icon: <EmojiFoodBeverageIcon/>,
+        link: '/projects'
     }, {
         name: 'Contact Me',
         icon: <LocalPostOfficeIcon/>,
+        link: '/contactMe'
     }]
 
 export const SideBar = (props: sideBarProps) => {
+    let navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
@@ -51,7 +57,7 @@ export const SideBar = (props: sideBarProps) => {
             <Divider/>
             <List>
                 {sideBarOptions.map((option, index) => (
-                    <ListItem key={option.name} disablePadding>
+                    <ListItem key={option.name} disablePadding onClick={()=>{navigate(option.link)}}>
                         <ListItemButton>
                             <ListItemIcon>
                                 {option.icon}

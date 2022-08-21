@@ -1,5 +1,21 @@
 import React from 'react';
+import {makeStyles} from '@mui/styles';
 
-export const Home =() =>{
-    return (<div>Home</div>)
+const useStyles = makeStyles({
+    title: {
+        fontSize: 40,
+        display: 'flex'
+    },
+});
+
+export const HomePage = () => {
+    const classes = useStyles();
+    return (
+        <div>
+            <div className={classes.title}>
+                <div className={'waviy'}>Hi</div>
+                <div style={{width: 12}}> </div>
+                <div className={'flipX'}>I am Kinson</div>
+            </div>
+        </div>)
 }

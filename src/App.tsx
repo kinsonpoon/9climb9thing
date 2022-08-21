@@ -8,10 +8,13 @@ import {
 import logo from './logo.svg';
 import './App.css';
 import {RouteWithLayout} from "./components/routeWithLayout/RouteWithLayout";
-import {Home} from "./screen/home";
+import {HomePage} from "./screen/home";
 import MainLayout from "./layout/mainLayout";
 import {createTheme} from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
+import {ProductsPage} from "./screen/products";
+import {ProjectsPage} from "./screen/projects";
+import {ContactMePage} from "./screen/contactMe";
 
 const Wrapper = ({ children }: any) => {
   const location = useLocation();
@@ -33,8 +36,12 @@ function App() {
               <BrowserRouter>
                   <Wrapper>
                       <Routes>
-                          <Route path="/home" element={<RouteWithLayout element={<Home/>} layout={MainLayout}/>}/>
-                          <Route path="/" element={<RouteWithLayout element={<Home/>} layout={MainLayout}/>}/>
+                          <Route path="/home" element={<RouteWithLayout element={<HomePage/>} layout={MainLayout}/>}/>
+                          <Route path="/products" element={<RouteWithLayout element={<ProductsPage/>} layout={MainLayout}/>}/>
+                          <Route path="/projects" element={<RouteWithLayout element={<ProjectsPage/>} layout={MainLayout}/>}/>
+                          <Route path="/contactMe" element={<RouteWithLayout element={<ContactMePage/>} layout={MainLayout}/>}/>
+                          <Route path="/" element={<RouteWithLayout element={<HomePage/>} layout={MainLayout}/>}/>
+
                       </Routes>
                   </Wrapper>
               </BrowserRouter>

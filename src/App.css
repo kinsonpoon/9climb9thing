@@ -14,6 +14,11 @@
 }
 main{
   padding-top: 56px;
+  width: 97%;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+  margin-top: 10px;
+
 }
 
 @media (min-width: 600px){
@@ -43,5 +48,38 @@ main{
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.waviy{
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  text-transform: uppercase;
+  animation: flip 3s infinite;
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg)
+  }
+}
+
+.flipX {
+  animation: 3s anim-flipX ease infinite;
+  animation-delay: 1s;
+}
+@keyframes anim-flipX {
+  0% {
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+  50% {
+    opacity: 1;
+    transform: rotateX(720deg);
+  }
+  100% {
+    /* animate nothing to pause animation at the end */
+    opacity: 1;
+    transform: rotateX(720deg);
   }
 }
